@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Entities;
+using Unity.Mathematics;
 
 public class PlayerAuthoring : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public class PlayerAuthoring : MonoBehaviour
         public override void Bake(PlayerAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
+            
+            // The ways to add components to the entity
             AddComponent(entity, new PlayerTag());
             AddComponent(entity, new MoveSpeed { Value = authoring.Speed });
+            AddComponent<PlayerInputState>(entity);
         }
     }
 
